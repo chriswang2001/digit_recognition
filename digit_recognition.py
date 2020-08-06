@@ -4,6 +4,7 @@ from numpy import *
 from os import listdir
 import operator
 
+#knn算法-参数(输入向量，数据集，标志向量，选取最接近的个数)
 def knn(invec, dataset, labelvec, k):
     datasetSize = dataset.shape[0]
     diffMat = tile(invec, (datasetSize,1)) - dataset
@@ -18,6 +19,7 @@ def knn(invec, dataset, labelvec, k):
     sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(1), reverse=True)
     return sortedClassCount[0][0]
 
+# 图像转换为向量
 def img_to_vector(filename):
     vector = zeros((1,1024))
     img = open(filename)
@@ -27,6 +29,7 @@ def img_to_vector(filename):
             vector[0,32*i+j] = int(line[j])
     return vector
 
+# 读取数据集
 def file_to_data(path):
     filelist = listdir(path)
     listlen = len(filelist)
